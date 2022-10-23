@@ -19,10 +19,6 @@ function App() {
   );
 }
 
-const Title = styled.h1`
-  color: red
-`;
-
 const Container = styled.div`
   display: flex;
   flex-direction: row;

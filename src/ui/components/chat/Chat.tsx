@@ -1,5 +1,4 @@
 import { faker } from "@faker-js/faker";
-import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { ConversationHeader } from "../conversation-header/ConversationHeader";
 import { MessageInput } from "../message-input/MessageInput";
