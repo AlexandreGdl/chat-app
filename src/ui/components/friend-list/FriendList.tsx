@@ -1,11 +1,11 @@
 import { faArchive, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
 import { Conversation } from "../conversation/Conversation";
 import { faker } from '@faker-js/faker';
 import { Separator } from "../separator/Separator";
 import { ProfilePicture } from "../profile-picture/ProfilePicture";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const friends = Array.from(Array(10).keys()).map((index) => ({
   url: faker.image.avatar(),
@@ -17,6 +17,7 @@ const friends = Array.from(Array(10).keys()).map((index) => ({
 const username = faker.name.fullName({ sex: 'male' });
 
 export const FriendList = (props: FriendListProps) => {
+  const themeContext = useContext(ThemeContext);
   const [active, setActive] = useState(0);
 
   return (
@@ -29,7 +30,7 @@ export const FriendList = (props: FriendListProps) => {
         </NameContainer>
       </ProfileContainer>
       <Separator height="1" className="mb-6" />
-      <AuthorContainer>Made with ❤️ by <a style={{ color: '#1858F9' }} rel="noopener noreferrer" target="_blank" href="https://github.com/AlexandreGdl">AlexandreGdl</a></AuthorContainer>
+      <AuthorContainer>Made with ❤️ by <a style={{ color: themeContext.colors.BLUE_1 }} rel="noopener noreferrer" target="_blank" href="https://github.com/AlexandreGdl">AlexandreGdl</a></AuthorContainer>
       <InputContainer>
         <FontAwesomeIcon icon={faSearch} size="xs" color="#333" />
         <SearchInput placeholder="Search or start new message" />
@@ -48,7 +49,7 @@ export const FriendList = (props: FriendListProps) => {
 const ListContainer = styled.div`
   height: 100%;
   width: 100%;
-  background-color: #F4F4F6;
+  background-color: ${props => props.theme.colors.GRAY_1};
   overflow: scroll;
 `;
 
@@ -57,7 +58,7 @@ const ConversationContainer = styled.div`
 `;
 
 const ArchivedContainer = styled.div`
-  color: #A7A7A7;
+  color: ${props => props.theme.colors.GRAY_3};
   text-align: center;
   display: flex;
   align-items: center;
@@ -109,7 +110,7 @@ const Name = styled.p`
 
 const Hello = styled.p`
   font-size: 14px;
-  color: #A7A7A7;
+  color: ${props => props.theme.colors.GRAY_3};
 `;
 
 const AuthorContainer = styled.p`

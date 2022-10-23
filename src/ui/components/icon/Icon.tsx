@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import styled from "styled-components";
+import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 export const Icon = (props: IconProps) => {
+  const themeContext = useContext(ThemeContext);
   const [hover, setHover] = useState(false);
 
   return (
@@ -11,7 +12,7 @@ export const Icon = (props: IconProps) => {
       onMouseLeave={() => setHover(false)}
       {...props}
     >
-      <FontAwesomeIcon icon={props.icon} size={props.iconSize ?? "xs"} color={hover ? props.hoverColor ?? "#A7A7A7" :props.color ?? "#A7A7A7"}/>
+      <FontAwesomeIcon icon={props.icon} size={props.iconSize ?? "xs"} color={hover ? props.hoverColor ?? themeContext.colors.GRAY_3 :props.color ?? themeContext.colors.GRAY_3}/>
     </IconContainer>
   );
 };
@@ -23,6 +24,6 @@ const IconContainer = styled.div<IconProps>`
   width: ${props => props.size ? props.size : '30'}px;
   height: ${props => props.size ? props.size : '30'}px;
   border-radius: 4px;
-  ${props => !props.noBackground && 'background-color:  #F4F4F6;'}
+  ${props => !props.noBackground && `background-color:  ${props.theme.colors.GRAY_3}`}
   cursor: pointer;
 `;

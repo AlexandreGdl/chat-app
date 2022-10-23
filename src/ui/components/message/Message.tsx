@@ -11,7 +11,7 @@ export const Message = (props: MessageProps) => (
 
 const MessageContainer = styled.div<MessageProps>`
   border-radius: 15px;
-  background-color: ${props => props.self ? '#1858F9' : '#F4F4F6'};
+  background-color: ${props => props.self ? props.theme.colors.BLUE_1 : props.theme.colors.GRAY_1};
   border-top-left-radius: ${props => props.self ? '15px' : '0px'};
   border-top-right-radius: ${props => props.self ? '0px' : '15px'};
   padding: 10px 20px;
@@ -28,7 +28,7 @@ const TextContainer = styled.p<MessageProps>`
 `;
 
 const DateContainer = styled.p<MessageProps>`
-  color: ${props => props.self ? '#EEEEEE' : '#A7A7A7'};
+  color: ${props => props.self ? '#EEEEEE' : props.theme.colors.GRAY_3};
   font-size: 12px;
   margin-top: 10px;
 `;

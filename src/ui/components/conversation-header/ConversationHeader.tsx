@@ -43,12 +43,12 @@ const MessageContainer = styled.p`
 
 const LastSeen = styled.p`
   font-size: 14px;
-  color: #A7A7A7;
+  color: ${props => props.theme.colors.GRAY_3};
 `;
 
 const Active = styled.div`
   font-size: 14px;
-  color: #78C772
+  color: ${props => props.theme.colors.GREEN_1}
 `;
 
 const IconContainer = styled.div`

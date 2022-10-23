@@ -1,10 +1,11 @@
 import EmojiPicker, { EmojiClickData, Theme as EmojiTheme } from "emoji-picker-react";
-import { useState } from "react";
-import styled from "styled-components";
+import { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export const MessageInput = (props: MessageInputProps) => {
+  const themeContext = useContext(ThemeContext);
   const [visible, setVisible] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -31,7 +32,7 @@ export const MessageInput = (props: MessageInputProps) => {
       </EmojiContainer>
       <Input placeholder="Write a message" value={message} onChange={(e) => setMessage(e.currentTarget.value)} onClick={handleInputClick} type="text" />
       <IconContainer>
-        <FontAwesomeIcon size="1x" icon={faPaperPlane} color="#1858F9"/>
+        <FontAwesomeIcon size="1x" icon={faPaperPlane} color={themeContext.colors.BLUE_1}/>
       </IconContainer>
     </InputContainer>
   );
@@ -39,7 +40,7 @@ export const MessageInput = (props: MessageInputProps) => {
 
 const InputContainer = styled.div`
   display: flex;
-  background-color: #F4F4F6;
+  background-color: ${props => props.theme.colors.GRAY_1};
   border-radius: 50px;
   padding: 10px;
   align-items: center;
@@ -48,7 +49,7 @@ const InputContainer = styled.div`
 `;
 
 const Input = styled.input`
-  background-color: #F4F4F6;
+  background-color: ${props => props.theme.colors.GRAY_1};
   -webkit-tap-highlight-color: transparent;
   outline: none;
   border-radius: 50px;
@@ -65,7 +66,7 @@ const EmojiContainer = styled.div`
   padding: 1px 5px;
   border-radius: 50px;
   &:hover {
-    background-color: #D7D7D7;
+    background-color: ${props => props.theme.colors.GRAY_2};
   }
 `;
 
@@ -83,6 +84,6 @@ const IconContainer = styled.div`
   padding: 8px 8px;  
   border-radius: 50px;
   &:hover {
-    background-color: #D7D7D7;
+    background-color: ${props => props.theme.colors.GRAY_2};
   }
 `;

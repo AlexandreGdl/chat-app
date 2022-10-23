@@ -1,14 +1,16 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { ThemeContext } from 'styled-components'
 import { ProfilePicture } from "../profile-picture/ProfilePicture";
 
 export const Conversation = (props: ConversationProps) => {
-
+  const themeContext = useContext(ThemeContext);
   const showAlert = (): boolean => props.alert && !props.active? props.alert > 0 : false;
 
   const getColor = (): string => {
     if (!props.active && showAlert()) return '#333';
     if (props.active) return '#fff';
-    return '#A7A7A7';
+    return themeContext.colors.GRAY_3;
   }
 
   const handlePress = () => {
@@ -36,7 +38,7 @@ const ConversationContainer = styled.div<{active?: boolean}>`
   cursor: pointer;
   border-radius: 12px;
   padding: 10px;
-  background-color: ${props => props.active ? '#1858F9' : ' #F4F4F6'};
+  background-color: ${props => props.active ? props.theme.colors.BLUE_1 : props.theme.colors.GRAY_1};
 `;
 
 const MiddleContainer = styled.div`
@@ -57,7 +59,7 @@ const MessageContainer = styled.p<{active?: boolean}>`
 
 const LastMessage = styled.p<{active?: boolean}>`
   font-size: 12px;
-  color: ${props => props.active ? '#EEEEEE' : '#A7A7A7'};
+  color: ${props => props.active ? '#EEEEEE' : props.theme.colors.GRAY_3};
 `;
 
 const RightContainer = styled.div`
@@ -78,7 +80,7 @@ const Alert = styled.div`
   padding: 0 6px;
   color: #fff;
   font-size: 12px;
-  background-color: #1858F9;
+  background-color: ${props => props.theme.colors.BLUE_1};
   border-radius: 50px;
   margin-bottom: 5px;
 `;

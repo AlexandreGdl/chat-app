@@ -6,6 +6,6 @@ export const Separator = (props: SeparatorProps) => (
 
 const SeparatorContainer = styled.div<SeparatorProps>`
   height: ${props => props.height ?? '2'}px;
-  background-color: ${props => props.color ?? '#D7D7D7'};
+  background-color: ${props => props.color ?? props.theme.colors.GRAY_2};
   width: 100%;
 `;

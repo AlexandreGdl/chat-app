@@ -1,21 +1,25 @@
 import styled from 'styled-components';
 import { faker } from '@faker-js/faker';
+import { ThemeProvider } from 'styled-components';
 import './index.css';
 import { Chat } from './ui/components/chat/Chat';
 import { FriendList } from './ui/components/friend-list/FriendList';
 import { Menu } from './ui/components/menu/Menu';
+import { theme } from './ui/themes/theme';
 
 function App() {
   return (
-    <Container className="App">
-      <Menu />
-      <FriendListContainer>
-        <FriendList  />
-      </FriendListContainer>
-      <ContainerChat>
-        <Chat url={faker.image.avatar()} name={faker.name.fullName({ sex: 'male' })} />
-      </ContainerChat>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container className="App">
+        <Menu />
+        <FriendListContainer>
+          <FriendList  />
+        </FriendListContainer>
+        <ContainerChat>
+          <Chat url={faker.image.avatar()} name={faker.name.fullName({ sex: 'male' })} />
+        </ContainerChat>
+      </Container>
+    </ThemeProvider>
   );
 }
 
