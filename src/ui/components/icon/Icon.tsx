@@ -24,6 +24,6 @@ const IconContainer = styled.div<IconProps>`
   width: ${props => props.size ? props.size : '30'}px;
   height: ${props => props.size ? props.size : '30'}px;
   border-radius: 4px;
-  ${props => !props.noBackground && `background-color:  ${props.theme.colors.GRAY_3}`}
+  ${props => !props.noBackground && `background-color:  ${props.theme.colors.GRAY_3};`}
   cursor: pointer;
 `;
