@@ -19,6 +19,12 @@ const username = faker.name.fullName({ sex: 'male' });
 export const FriendList = (props: FriendListProps) => {
   const themeContext = useContext(ThemeContext);
   const [active, setActive] = useState(0);
+  const [search, setSearch] = useState('');
+
+  const shouldDisplay = (id: number) => {
+    const friend = friends[id];
+    return search ? friend.name.toLowerCase().includes(search.toLowerCase()) : true;
+  }
 
   return (
     <ListContainer>
@@ -33,14 +39,14 @@ export const FriendList = (props: FriendListProps) => {
       <AuthorContainer>Made with ❤️ by <a style={{ color: themeContext.colors.BLUE_1 }} rel="noopener noreferrer" target="_blank" href="https://github.com/AlexandreGdl">AlexandreGdl</a></AuthorContainer>
       <InputContainer>
         <FontAwesomeIcon icon={faSearch} size="xs" color="#333" />
-        <SearchInput placeholder="Search or start new message" />
+        <SearchInput onChange={(e) => setSearch(e.currentTarget.value)} placeholder="Search a conversation" />
       </InputContainer>
       <ArchivedContainer>
         Archived 211 
         <FontAwesomeIcon icon={faArchive} />
       </ArchivedContainer>
       <ConversationContainer>
-        {friends.map((friend, index) => <Conversation key={index} alert={friend.alert} onPress={setActive} id={index} active={index === active} className="mb-2" lastMessage={friend.lastMessage} name={friend.name} state="sent" url={friend.url}/>)}
+        {friends.map((friend, index) => shouldDisplay(index) &&  <Conversation key={index} alert={friend.alert} onPress={setActive} id={index} active={index === active} className="mb-2" lastMessage={friend.lastMessage} name={friend.name} state="sent" url={friend.url}/>)}
       </ConversationContainer>
     </ListContainer>
   );
