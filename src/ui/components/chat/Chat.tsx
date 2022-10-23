@@ -1,17 +1,26 @@
 import { faker } from "@faker-js/faker";
+import { useState } from "react";
 import styled from "styled-components";
 import { ConversationHeader } from "../conversation-header/ConversationHeader";
 import { MessageInput } from "../message-input/MessageInput";
 import { Message } from "../message/Message";
 import { Separator } from "../separator/Separator";
 
-const messages = Array.from(Array(10).keys()).map((index) => ({
+const initialMessages = Array.from(Array(10).keys()).map((index) => ({
   text: faker.lorem.sentence(10),
   date: '09:12 PM',
   self: Math.floor(Math.random() * 2) === 0,
 }));
 
 export const Chat = (props: ChatProps) => {
+  const [messages, setMessages] = useState(initialMessages)
+  const addMessage = (msg: string) => {
+    setMessages(prev => [...prev, {
+      text: msg,
+      date: '09:12 PM',
+      self: true,
+    }]);
+  }
 
   return (
     <ChatContainer>
@@ -21,7 +30,7 @@ export const Chat = (props: ChatProps) => {
         {messages.map((m, index) => <Message key={index} text={m.text} date={m.date} self={m.self} />)}
         <div ref={(r) => r?.scrollIntoView()}></div> {/* Scroll purpose */}
       </MessagesContainer>
-      <MessageInput className="ml-4 mr-4" emojiPosition="top"/>
+      <MessageInput onEnter={addMessage} className="ml-4 mr-4" emojiPosition="top"/>
     </ChatContainer>
   );
 }

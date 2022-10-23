@@ -18,6 +18,13 @@ export const MessageInput = (props: MessageInputProps) => {
     if (visible) setVisible(false);
   }
 
+  const handleSend = () => {
+    if (props.onEnter && message.trim().length > 0) {
+      props.onEnter(message);
+      setMessage('');
+    }
+  }
+
   return (
     <InputContainer className={props.className}>
       <EmojiContainer className="flex justify-center items-center">
@@ -30,8 +37,8 @@ export const MessageInput = (props: MessageInputProps) => {
           />
         </PickerContainer>}
       </EmojiContainer>
-      <Input placeholder="Write a message" value={message} onChange={(e) => setMessage(e.currentTarget.value)} onClick={handleInputClick} type="text" />
-      <IconContainer>
+      <Input onKeyDown={k => k.key === 'Enter' ? handleSend() : undefined} placeholder="Write a message" value={message} onChange={(e) => setMessage(e.currentTarget.value)} onClick={handleInputClick} type="text" />
+      <IconContainer onClick={handleSend}>
         <FontAwesomeIcon size="1x" icon={faPaperPlane} color={themeContext.colors.BLUE_1}/>
       </IconContainer>
     </InputContainer>
