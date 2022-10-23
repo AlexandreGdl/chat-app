@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import { faker } from '@faker-js/faker';
+import './index.css';
+import { Chat } from './ui/components/chat/Chat';
+import { FriendList } from './ui/components/friend-list/FriendList';
+import { Menu } from './ui/components/menu/Menu';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <Menu />
+      <FriendListContainer>
+        <FriendList  />
+      </FriendListContainer>
+      <ContainerChat>
+        <Chat url={faker.image.avatar()} name={faker.name.fullName({ sex: 'male' })} />
+      </ContainerChat>
+    </Container>
   );
 }
+
+const Title = styled.h1`
+  color: red
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+`;
+
+const FriendListContainer = styled.div`
+  flex-basis: 30%;
+`;
+
+const ContainerChat = styled.div`
+  flex-grow: 1;
+`;
 
 export default App;

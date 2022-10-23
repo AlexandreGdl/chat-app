@@ -1,0 +1,3 @@
+type PictureProps = {
+  url: string;
+}
